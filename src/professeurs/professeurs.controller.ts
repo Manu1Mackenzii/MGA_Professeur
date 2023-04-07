@@ -6,39 +6,39 @@ import { Professeur } from './entities/professeur.entity';
 
 @Controller('professeurs')
 export class ProfesseursController {
-  private readonly professeurs: Professeur[] = [];
-  //constructor(private readonly professeursService: ProfesseursService) {}
-
-  // @Post()
-  // create(@Body() createProfesseurDto: CreateProfesseurDto) {
-  //   return this.professeursService.create(createProfesseurDto);
-  // }
+  //private readonly professeurs: Professeur[] = [];
+  constructor(private readonly professeursService: ProfesseursService) {}
 
   @Post()
-  createProfesseur(@Body() professeur: Professeur): Professeur {
-    professeur.id = Date.now();
-    this.professeurs.push(professeur);
-    return professeur;
+  create(@Body() createProfesseurDto: CreateProfesseurDto) {
+    return this.professeursService.create(createProfesseurDto);
   }
 
-  @Get()
-  getAllProfesseurs(): Professeur[] {
-    return this.professeurs;
-  }
+  // @Post()
+  // createProfesseur(@Body() professeur: Professeur): Professeur {
+  //   professeur.id = Date.now();
+  //   this.professeurs.push(professeur);
+  //   return professeur;
+  // }
 
-  @Get(':id')
-  getProfesseurById(@Param('id') id: number): Professeur {
-    return this.professeurs.find(professeur => professeur.id === id);
-  }
   // @Get()
-  // findAll() {
-  //   return this.professeursService.findAll();
+  // getAllProfesseurs(): Professeur[] {
+  //   return this.professeurs;
   // }
 
   // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.professeursService.findOne(+id);
+  // getProfesseurById(@Param('id') id: number): Professeur {
+  //   return this.professeurs.find(professeur => professeur.id === id);
   // }
+  @Get()
+  findAll() {
+    return this.professeursService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.professeursService.findOne(+id);
+  }
 
   // @Patch(':id')
   // update(@Param('id') id: string, @Body() updateProfesseurDto: UpdateProfesseurDto) {
@@ -47,22 +47,22 @@ export class ProfesseursController {
 
   @Put(':id')
   updateProfesseur(@Param('id') id: number, @Body() professeur: Professeur): Professeur {
-    const index = this.professeurs.findIndex(professeur => professeur.id === id);
-    this.professeurs[index] = { ...this.professeurs[index], ...professeur };
-    return this.professeurs[index];
+    const index = this.professeursService.findIndex(professeur => professeur.id === id);
+    this.professeursService[index] = { ...this.professeursService[index], ...professeur };
+    return this.professeursService[index];
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.professeursService.remove(+id);
   }
 
   // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.professeursService.remove(+id);
+  // // deleteProfesseur(@Param('id') id: number): void {
+  // //   const index = this.professeurs.findIndex(professeur => professeur.id === id);
+  // //   this.professeurs.splice(index, 1);
+  //   remove(@Param('id') id: number): string {
+  //   return `Professeur ${id} supprimé avec succès`;
   // }
-
-  @Delete(':id')
-  // deleteProfesseur(@Param('id') id: number): void {
-  //   const index = this.professeurs.findIndex(professeur => professeur.id === id);
-  //   this.professeurs.splice(index, 1);
-    remove(@Param('id') id: number): string {
-    return `Professeur ${id} supprimé avec succès`;
-  }
 
 }

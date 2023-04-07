@@ -5,9 +5,9 @@ import { ProfesseursController } from './professeurs.controller';
 
 @Module({
  // controllers: [ProfesseursController],
- // providers: [ProfesseursService],
+ providers: [ProfesseursService],
   imports: [],
   controllers: [ProfesseursController],
-  providers: [],
+  //providers: [],
 })
 export class ProfesseursModule {}

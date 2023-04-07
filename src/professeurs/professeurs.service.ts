@@ -4,6 +4,7 @@ import { UpdateProfesseurDto } from './dto/update-professeur.dto';
 
 @Injectable()
 export class ProfesseursService {
+  [x: string]: any;
   create(createProfesseurDto: CreateProfesseurDto) {
     return 'This action adds a new professeur';
   }
